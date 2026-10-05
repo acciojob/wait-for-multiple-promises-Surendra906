@@ -15,11 +15,11 @@ const promise2=createPromise("promise 2");
 const promise3=createPromise("promise 3");
 
 
-promise.all([promise1,promise2,promise3]).then((results)=>{
+Promise.all([promise1,promise2,promise3]).then((results)=>{
 	const outputElement=document.getElementById("output");
 	outputElement.innerHTML="";
 
-	const maxTimme=Math.max(...results.map((result)=>result.time));
+	const maxTime=Math.max(...results.map((result)=>result.time));
 	results.forEach((result)=>{
 		const tr=document.createElement("tr");
 		tr.innerHTML=`
@@ -32,7 +32,7 @@ promise.all([promise1,promise2,promise3]).then((results)=>{
 	const totalTr=document.createElement("tr");
 	totalTr.innerHTML=`
 	<td>Total</td>
-	<td>${totalTime.toFixed(3)}</td>
+	<td>${maxTime.toFixed(3)}</td>
 	`;
 	outputElement.appendChild(totalTr);
 })
