@@ -1,7 +1,7 @@
 //your JS code here. If required.
 function createPromise(promiseName){
 	const timeTaken=Math.random()*2+1;
-	return new promise((resolve)=>{
+	return new Promise((resolve)=>{
 		setTimeout(()=>{
 			resolve({
 				name:promiseName,
@@ -10,18 +10,16 @@ function createPromise(promiseName){
 		},timeTaken*1000);
 	});
 }
-const startTime=performance.now();
 const promise1=createPromise("promise 1");
 const promise2=createPromise("promise 2");
 const promise3=createPromise("promise 3");
 
 
 promise.all([promise1,promise2,promise3]).then((results)=>{
-	const endTime=performance.now();
-	const totalTime=(endTime-startTime)/1000;
-
 	const outputElement=document.getElementById("output");
-	outputElement.innerHTMl="";
+	outputElement.innerHTML="";
+
+	const maxTimme=Math.max(...results.map((result)=>result.time));
 	results.forEach((result)=>{
 		const tr=document.createElement("tr");
 		tr.innerHTML=`
@@ -30,6 +28,7 @@ promise.all([promise1,promise2,promise3]).then((results)=>{
 		`;
 		outputElement.appendChild(tr);
 	});
+	
 	const totalTr=document.createElement("tr");
 	totalTr.innerHTML=`
 	<td>Total</td>
